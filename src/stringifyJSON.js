@@ -8,7 +8,6 @@ var stringifyJSON = function(obj) {
   //Input: object
   //Output: string
   //Edge cases: null (classified as object), arrays (classified as an object), undefined/functions (invalid)
-  //Plan:
 
   var stringified = '';
 
@@ -26,14 +25,30 @@ var stringifyJSON = function(obj) {
     }
   };
 
-  //Turns array to string
+  //Iterates through objects()
+  var iterateObject = function () {
+    var objectString = [];
+    for (var key in obj) {
+      if (obj[key] === undefined || typeof obj[key] === function() {}) {
+        continue;
+      }
+      objectString.push('"' + key + '"' + ':' + stringifyJSON(obj[key]));
+    }
+    return objectString.join(',');
+  };
 
-  //Turns object to string
+  //Iterates through arrays()
+  var iterateArray = function () {
+    var arrayString = [];
+    for (var i = 0; i < obj.length; i++) {
+      if(obj[i] === undefined || typeof obj[i] === function(){}) {
+        continue;
+      }
+      arrayString.push(stringifyJSON(obj[i]));
+    }
+    return arrayString.join(',');
+  };
 
-  //Iterates through objects
-
-
-  //Iterates through arrays
 
   //MAIN
   if (typeof obj === 'object') { //Accepts NULL, objects, and arrays
@@ -41,6 +56,7 @@ var stringifyJSON = function(obj) {
       stringified += obj;
     } else if (Array.isArray(obj)) { //array case
       //Array to string function
+      stringified += '[' + iterateArray() + ']';
     } else { //Object case
       //Object to string function
     }
