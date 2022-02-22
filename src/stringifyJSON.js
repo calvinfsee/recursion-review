@@ -15,7 +15,7 @@ var stringifyJSON = function(obj) {
   //HELPER FUNCTIONS
 
   //Stringifies Base Cases: strings, numbers, booleans
-  var stringify = function () {
+  var baseCase = function () {
     if (obj === undefined || typeof obj === typeof function(){}) {
       return '';
     }
@@ -26,11 +26,27 @@ var stringifyJSON = function(obj) {
     }
   };
 
+  //Turns array to string
+
+  //Turns object to string
+
+  //Iterates through objects
+
+
+  //Iterates through arrays
+
   //MAIN
   if (typeof obj === 'object') { //Accepts NULL, objects, and arrays
+    if (obj === null) { //exception NULL case
+      stringified += obj;
+    } else if (Array.isArray(obj)) { //array case
+      //Array to string function
+    } else { //Object case
+      //Object to string function
+    }
 
   } else { //Base Cases
-    stringified += stringify(obj);
+    stringified += baseCase(obj);
   }
 
   return stringified;
